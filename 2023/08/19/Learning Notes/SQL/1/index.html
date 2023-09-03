@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>高級sql | Alice&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="sql" />
+    
+    <meta name="description" content="七大類型文章分別取前五篇筆記的sql1234567891011121314select * from (    SELECT        *,        @row_number:&#x3D;CASE            WHEN @blog_type_no &#x3D; blog_type THEN @row_number + 1            ELSE 1        END AS num,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高級sql">
+<meta property="og:url" content="http://example.com/2023/08/19/Learning%20Notes/SQL/1/index.html">
+<meta property="og:site_name" content="Alice&#39;s Blog">
+<meta property="og:description" content="七大類型文章分別取前五篇筆記的sql1234567891011121314select * from (    SELECT        *,        @row_number:&#x3D;CASE            WHEN @blog_type_no &#x3D; blog_type THEN @row_number + 1            ELSE 1        END AS num,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-19T13:38:07.000Z">
+<meta property="article:modified_time" content="2023-08-19T16:59:57.784Z">
+<meta property="article:author" content="Alice Chang">
+<meta property="article:tag" content="sql">
+<meta name="twitter:card" content="summary">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Learning-Notes/">Learning Notes</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Learning-Notes/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Learning-Notes/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Learning-Notes/SQL/">SQL</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Learning-Notes/SQL/">SQL</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Learning Notes/SQL/1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        高級sql
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/08/19/Learning%20Notes/SQL/1/" class="article-date">
+       <time datetime="2023-08-19T13:38:07.000Z" itemprop="datePublished">2023-08-19</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/08/19/Learning%20Notes/SQL/1/" class="article-date">
+     <time datetime="2023-08-19T16:59:57.784Z" itemprop="dateModified">2023-08-20</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/sql/" rel="tag">sql</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h2 id="七大類型文章分別取前五篇筆記的sql"><a href="#七大類型文章分別取前五篇筆記的sql" class="headerlink" title="七大類型文章分別取前五篇筆記的sql"></a>七大類型文章分別取前五篇筆記的sql</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">SELECT</span></span><br><span class="line">        <span class="operator">*</span>,</span><br><span class="line">        <span class="variable">@row_number</span>:<span class="operator">=</span><span class="keyword">CASE</span></span><br><span class="line">            <span class="keyword">WHEN</span> <span class="variable">@blog_type_no</span> <span class="operator">=</span> blog_type <span class="keyword">THEN</span> <span class="variable">@row_number</span> <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">ELSE</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">END</span> <span class="keyword">AS</span> num,</span><br><span class="line">        <span class="variable">@blog_type_no</span>:<span class="operator">=</span>blog_type <span class="keyword">as</span> BlogType</span><br><span class="line">    <span class="keyword">FROM</span></span><br><span class="line">        leju_blog, (<span class="keyword">SELECT</span> <span class="variable">@blog_type_no</span>:<span class="operator">=</span><span class="number">0</span>,<span class="variable">@row_number</span>:<span class="operator">=</span><span class="number">0</span>) <span class="keyword">as</span> t</span><br><span class="line">    <span class="keyword">WHERE</span> blog_type <span class="keyword">in</span> (<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> blog_type <span class="keyword">desc</span>, release_date <span class="keyword">desc</span></span><br><span class="line">) <span class="keyword">as</span> ranking</span><br><span class="line"><span class="keyword">WHERE</span> ranking.num<span class="operator">&lt;=</span><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="嚴謹的更新資料庫資料"><a href="#嚴謹的更新資料庫資料" class="headerlink" title="嚴謹的更新資料庫資料"></a>嚴謹的更新資料庫資料</h2><p>找出信義房屋的維護人，設定他們的expert_agency、business、license_verified_state</p>
+<ul>
+<li>檢查查詢內容，看是否有企業訂單內的 maintain_uid 不存在於 leju_member 內。正常來說不應該出現。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 正式站因為欄位語系問題，使用變數需要指定語系</span><br><span class="line"># 信義房屋企業訂單</span><br><span class="line">#<span class="keyword">SET</span> <span class="variable">@order_number</span> <span class="operator">=</span> <span class="string">&#x27;B2023&#x27;</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@order_number</span> <span class="operator">=</span> <span class="string">&#x27;B2023&#x27;</span> <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(`leju_expert_order_bodys`.`maintain_uid`), `leju_member`.`id`, `leju_member`.`expert_agency`, `leju_member`.`license_verified_state`, `leju_member`.`business`</span><br><span class="line"><span class="keyword">FROM</span> `leju_expert_order_bodys` <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> `leju_member`</span><br><span class="line"><span class="keyword">ON</span> `leju_expert_order_bodys`.`maintain_uid` <span class="operator">=</span> `leju_member`.`id`</span><br><span class="line"><span class="keyword">WHERE</span> `leju_expert_order_bodys`.`order_number` <span class="operator">=</span> <span class="variable">@order_number</span></span><br><span class="line"><span class="keyword">AND</span> `leju_expert_order_bodys`.`deleted_at` <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">AND</span> `leju_expert_order_bodys`.`expire_date` <span class="operator">&gt;</span> NOW()</span><br><span class="line"><span class="keyword">AND</span> `leju_member`.`id` <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> `leju_member`.`id` <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure></li>
+<li>檢查要更新的內容<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 正式站因為欄位語系問題，使用變數需要指定語系</span><br><span class="line"># 信義房屋企業訂單</span><br><span class="line">#<span class="keyword">SET</span> <span class="variable">@order_number</span> <span class="operator">=</span> <span class="string">&#x27;B2023&#x27;</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@order_number</span> <span class="operator">=</span> <span class="string">&#x27;B2023&#x27;</span> <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span>(`leju_expert_order_bodys`.`maintain_uid`), `leju_member`.`id`, `leju_member`.`expert_agency`, `leju_member`.`license_verified_state`, `leju_member`.`business`</span><br><span class="line"><span class="keyword">FROM</span> `leju_expert_order_bodys` <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> `leju_member`</span><br><span class="line"><span class="keyword">ON</span> `leju_expert_order_bodys`.`maintain_uid` <span class="operator">=</span> `leju_member`.`id`</span><br><span class="line"><span class="keyword">WHERE</span> `leju_expert_order_bodys`.`order_number` <span class="operator">=</span> <span class="variable">@order_number</span></span><br><span class="line"><span class="keyword">AND</span> `leju_expert_order_bodys`.`deleted_at` <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">AND</span> `leju_expert_order_bodys`.`expire_date` <span class="operator">&gt;</span> NOW()</span><br><span class="line"><span class="keyword">AND</span> `leju_member`.`id` <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> `leju_member`.`id` <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure></li>
+<li>確認沒問題後，執行要更新的內容<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 正式站因為欄位語系問題，使用變數需要指定語系</span><br><span class="line"># 信義房屋企業訂單</span><br><span class="line">#<span class="keyword">SET</span> <span class="variable">@order_number</span> <span class="operator">=</span> <span class="string">&#x27;B2023&#x27;</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@order_number</span> <span class="operator">=</span> <span class="string">&#x27;B2023&#x27;</span> <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"># 信義房屋公司名稱</span><br><span class="line">#<span class="keyword">SET</span> <span class="variable">@expert_agency</span> <span class="operator">=</span> <span class="string">&#x27;信義房屋&#x27;</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@expert_agency</span> <span class="operator">=</span> <span class="string">&#x27;信義房屋&#x27;</span> <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"># 證照狀態統一修改為有證照</span><br><span class="line">#<span class="keyword">SET</span> <span class="variable">@license_verified_state</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@license_verified_state</span> <span class="operator">=</span> <span class="number">1</span> <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"># 信義房屋公司完整名稱</span><br><span class="line">#<span class="keyword">SET</span> <span class="variable">@business</span> <span class="operator">=</span> <span class="string">&#x27;信義房屋股份有限公司&#x27;</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@business</span> <span class="operator">=</span> <span class="string">&#x27;信義房屋股份有限公司&#x27;</span> <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"><span class="keyword">UPDATE</span> `leju_expert_order_bodys` <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> `leju_member`</span><br><span class="line"><span class="keyword">ON</span> `leju_expert_order_bodys`.`maintain_uid` <span class="operator">=</span> `leju_member`.`id`</span><br><span class="line"><span class="keyword">SET</span> `leju_member`.`expert_agency` <span class="operator">=</span> <span class="variable">@expert_agency</span>, `leju_member`.`license_verified_state` <span class="operator">=</span> <span class="variable">@license_verified_state</span>, `leju_member`.`business` <span class="operator">=</span> <span class="variable">@business</span></span><br><span class="line"><span class="keyword">WHERE</span> `leju_expert_order_bodys`.`order_number` <span class="operator">=</span> <span class="variable">@order_number</span></span><br><span class="line"><span class="keyword">AND</span> `leju_expert_order_bodys`.`deleted_at` <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">AND</span> `leju_expert_order_bodys`.`expire_date` <span class="operator">&gt;</span> NOW()</span><br><span class="line"><span class="keyword">AND</span> `leju_member`.`id` <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="刪資料前先備份"><a href="#刪資料前先備份" class="headerlink" title="刪資料前先備份"></a>刪資料前先備份</h2><ul>
+<li>先建一樣結構的新表<br>CREATE TABLE [目的表] LIKE [來源表];<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> leju_expert_order_bodys_tmp_20230808 <span class="keyword">LIKE</span> leju_expert_order_bodys;</span><br></pre></td></tr></table></figure></li>
+<li>把舊表資料同步到新表<br>INSERT INTO [目的表] SELECT * FROM [來源表];<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> leju_expert_order_bodys_tmp_20230808 <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> leju_expert_order_bodys;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2023/08/19/Learning%20Notes/SQL/1/" data-id="clm3cd7ju0001kox14vmretfe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Alice Chang"
+        },
+        "headline": "高級sql",
+        "image": "http://example.com",
+        "keywords": "sql",
+        "genre": "Learning Notes SQL",
+        "datePublished": "2023-08-19",
+        "dateCreated": "2023-08-19",
+        "dateModified": "2023-08-20",
+        "url": "http://example.com/2023/08/19/Learning Notes/SQL/1/",
+        "description": "七大類型文章分別取前五篇筆記的sql1234567891011121314select * from (    SELECT        *,        @row_number:=CASE            WHEN @blog_type_no = blog_type THEN @row_number + 1            ELSE 1        END AS num,   ",
+        "wordCount": 609
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+      
+    <div class="fb-comments" data-width="100%" data-href="http://example.com/2023/08/19/Learning%20Notes/SQL/1/" data-num-posts="5"></div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/YTC54314" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/yitzu-chang-761434177" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/alicebalala" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/09/03/Learning%20Notes/Hexo/HexoAndGithub/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Hexo + GitHub Pages 架設個人網誌
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/08/19/Learning%20Notes/Linux/Command/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Linux指令</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2023/09/03/Learning%20Notes/Hexo/HexoAndGithub/" class="title">Hexo + GitHub Pages 架設個人網誌</a></p>
+                            <p class="item-date"><time datetime="2023-09-03T13:38:07.000Z" itemprop="datePublished">2023-09-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2023/08/19/Learning%20Notes/SQL/1/" class="title">高級sql</a></p>
+                            <p class="item-date"><time datetime="2023-08-19T13:38:07.000Z" itemprop="datePublished">2023-08-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2023/08/19/Learning%20Notes/Linux/Command/" class="title">Linux指令</a></p>
+                            <p class="item-date"><time datetime="2023-08-19T13:38:07.000Z" itemprop="datePublished">2023-08-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2023/08/06/Learning%20Notes/Hexo/Basic/" class="title">Hexo Readme</a></p>
+                            <p class="item-date"><time datetime="2023-08-06T13:38:07.000Z" itemprop="datePublished">2023-08-06</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Notes/">Learning Notes</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Notes/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Notes/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Notes/Linux/Command/">Command</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Notes/SQL/">SQL</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/" rel="tag">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://github.com/YTC54314">github</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://www.facebook.com/alicebalala">facebook</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/yitzu-chang-761434177">linkedin</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Alice Chang</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en/sdk.js#xfbml=1&version=v9.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
