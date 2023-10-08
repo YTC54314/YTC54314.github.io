@@ -6,13 +6,13 @@
     
 
     
-    <title>Tag: linux | Alice&#39;s Blog</title>
+    <title>Category: Command | Alice&#39;s Blog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta property="og:type" content="website">
 <meta property="og:title" content="Alice&#39;s Blog">
-<meta property="og:url" content="http://example.com/tags/linux/index.html">
+<meta property="og:url" content="http://example.com/categories/Learning-Notes/Redis/Command/index.html">
 <meta property="og:site_name" content="Alice&#39;s Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Alice Chang">
@@ -144,7 +144,7 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>Tag: <em>linux</em>
+    <i class="icon fa fa-folder-open"></i>Category: <em class="page-title-link">Command</em>
     </h1>
 </div>
 
@@ -170,30 +170,27 @@
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Linux/">Linux</a>
+            <a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Redis/">Redis</a>
             </div>
-            <div class="date"><time datetime="2023-08-19T13:38:07.000Z" itemprop="datePublished">2023-08-19</time></div>
+            <div class="date"><time datetime="2023-10-08T16:38:07.000Z" itemprop="datePublished">2023-10-09</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2023/08/19/Learning%20Notes/Linux/Command/">Linux指令</a>
+        <a href="/2023/10/09/Learning%20Notes/Redis/Command/">Redis指令</a>
         </h1>
     
 
         <p class="article-excerpt">
-            看硬體容量
+            前置作業
 
-在當前目錄中查找所有子目錄的總大小find . -maxdepth 1 -type d -exec du -sh &#123;&#125; \;
-看當前資料夾的總量du -sh
-查詢系統的空間使用率df -h
-列出所有檔案，’h’是讓容量顯示單位ls -alh
+確認機器有裝 redis cli，並有權限連進目標Redis host
 
 
-網域查詢
+語法
 
-查詢機器有在監聽的portnetstat -tulpn
-查詢機器所有監聽，僅列出port 6379netst
+進到正式 backend 機
+連進正式 redis host (路徑在html下redis-stable)&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;redis-stable&#x2F;src&#x2F;redis-cli -h leju-redis-l
         </p>
     </div>
 </article>
@@ -203,6 +200,7 @@
 
 
     </div></section>
+
 
 
 

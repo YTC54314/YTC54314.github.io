@@ -6,13 +6,13 @@
     
 
     
-    <title>Tag: linux | Alice&#39;s Blog</title>
+    <title>Tag: code review | Alice&#39;s Blog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta property="og:type" content="website">
 <meta property="og:title" content="Alice&#39;s Blog">
-<meta property="og:url" content="http://example.com/tags/linux/index.html">
+<meta property="og:url" content="http://example.com/tags/code-review/index.html">
 <meta property="og:site_name" content="Alice&#39;s Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Alice Chang">
@@ -144,7 +144,7 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>Tag: <em>linux</em>
+    <i class="icon fa fa-tag"></i>Tag: <em>code review</em>
     </h1>
 </div>
 
@@ -170,30 +170,33 @@
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Linux/">Linux</a>
+            <a class="article-category-link" href="/categories/Learning-Notes/">Learning Notes</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Learning-Notes/Code-Review/">Code Review</a>
             </div>
             <div class="date"><time datetime="2023-08-19T13:38:07.000Z" itemprop="datePublished">2023-08-19</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2023/08/19/Learning%20Notes/Linux/Command/">Linux指令</a>
+        <a href="/2023/08/19/Learning%20Notes/CodeReview/CodeReview/">Code Reviewer 的心法與職權邊界</a>
         </h1>
     
 
         <p class="article-excerpt">
-            看硬體容量
+            目的
 
-在當前目錄中查找所有子目錄的總大小find . -maxdepth 1 -type d -exec du -sh &#123;&#125; \;
-看當前資料夾的總量du -sh
-查詢系統的空間使用率df -h
-列出所有檔案，’h’是讓容量顯示單位ls -alh
+符合團隊規範：架構、風格
+程式品質
+測不出來的東西，例如：維護性、可讀性
+邏輯漏洞（非功能正確性）、安全漏洞
+知識分享交流（自己可以學習）
 
+心法、準則
 
-網域查詢
-
-查詢機器有在監聽的portnetstat -tulpn
-查詢機器所有監聽，僅列出port 6379netst
+Done is better than perfect (scrum 精神)。
+功能有達到就60分了，我們目標是80分，不要求100分。
+大架構到程式碼
+掃過一眼程式的檔案結構，是否有不該上傳或缺漏的檔案
+命名有沒有意義&#x2F;不一
         </p>
     </div>
 </article>
